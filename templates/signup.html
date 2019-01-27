@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+{% load bootstrap4 %}
+<head>
+    {% block head %}
+    <title>Sign Up</title>
+    {% endblock %}
+</head>
+{% block body %}
+    <body class="main-section">
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-lg-5 offset-lg-3 mb-5">
+                    <h3 class="text-center mb-5">Sign Up & Be Part Of it</h3>
+                     <form method="post" class="container">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <input type="submit" value="signup" class="btn btn-secondary form-control">
+                        <a class="btn btn-warning form-control mt-3" href="{% url 'accounts:login' %}">
+                            Already A Member? Login</a>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+
+    </body>
+    <footer class="bg-black text-center mb-0 text-white ">
+        <span>Soleil Levant</span>|
+        <span>Copyright &copy;<span id="year"></span></span>
+    </footer>
+{% endblock %}
+</html>

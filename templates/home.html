@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
+          integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp"
+    crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/custom_style.css' %}">
+    <link rel="icon" type="image/ico" href="{% static 'images/soleil_icon.png' %}">
+    {% block head %}
+    <title>Home</title>
+    {% endblock %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark mynav">
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'accounts:home' %}"><span class="text-warning">Soleil</span> Levant</a>
+            <button class="navbar-toggler" data-toggle="collapse" data-target="#navBarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navBarCollapse">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'articles:articles_list' %}">Articles</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Events</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+                    </li>
+                    {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Donate</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}
+    <section class="main-section">
+        <div class="container">
+            <div class="row pt-3">
+                <div class="col-lg-4 mb-5">
+                    <div class="card">
+                        <img src="../static/images/soleil.jpg" class="card-img-top img-fluid">
+                        <div class="card-body">
+                           <h4 class="card-header text-white bg-black text-center">Break The Silence!
+                               <small class="font-italic">"Kivunja Ukimva!"</small></h4>
+                            <div class="card text">
+                                <p class="bg-black text-warning p-2 text-center">Be The Voice For The Voiceless!</p>
+                            </div>
+                            <h4 class="card-header text-white bg-black text-center">Stand Up For Your Dream!</h4>
+                            <div class="card text">
+                                <p class="bg-black text-warning p-2 text-center">Lets Come Together And Realize The
+                                    Dream Of An Equal Society
+                                    <span class="text-white">#Different But Equal!</span> </p>
+                            </div>
+                             <h4 class="card-header text-white bg-black text-center">About Us</h4>
+                            <div class="card text">
+                                <div class="bg-black text-warning p-2">
+                                    <p>Organization Name: <span class="text-white">Soleil Levant</span></p>
+                                    <p>Mission Statement:</p>
+                                    <p class="text-white">
+                                        We are a group of <span class="text-warning">Feminists</span> Solely aiming
+                                        for the world to achieve gender equality.
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    <div class="myslider mb-5">
+                        <div class="carousel slide" data-ride="carousel" id="myCarousel">
+                            <ol class="carousel-indicators">
+                                <li class="active" data-target="#myCarousel" data-slide-to="0"></li>
+                                <li data-target="#myCarousel" data-slide-to="1"></li>
+                                <li data-target="#myCarousel" data-slide-to="2"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div class="carousel-item carousel-image-1 active">
+                                    <div class="container">
+                                        <div class="carousel-caption  mb-5">
+                                            <p class="text-warning bg-cover">
+                                                <strong>Be Part Of Our Life Changing Events</strong>
+                                            </p>
+                                            <a class="btn btn-warning" href="#">Check Out Our Events</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="carousel-item carousel-image-2 ">
+                                    <div class="container">
+                                        <div class="carousel-caption  mb-5">
+                                            <p class="text-warning bg-cover">
+                                                Great Articles On Gender Related Issues
+                                            </p>
+                                            <a class="btn btn-warning" href="{% url 'articles:articles_list' %}">Read Our Articles</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="carousel-item carousel-image-3 ">
+                                    <div class="container">
+                                        <div class="carousel-caption mb-5">
+                                            <p class="text-warning bg-cover">
+                                               Write An Article That Will Help The World Achieve Gender Equality
+                                            </p>
+                                            <a class="btn btn-warning" href="{% url 'accounts:signup' %}">Sign Up Now! Play Your Part</a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <a href="#myCarousel" class="carousel-control-prev" data-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </a>
+                                <a href="#myCarousel" class="carousel-control-next" data-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div>
+                    <div class="row">
+                        <div class="col-lg-8">
+                        <h4 class="text-center text-white font-italic">Founder's Statement</h4>
+                        <div class="statement">
+                            <p class="text-white p-3 font-italic">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequuntur
+                                enim explicabo fuga minus molestias omnis rem reprehenderit sed vitae!
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores fuga
+                                obcaecati quaerat suscipit! Amet laborum laudantium maxime neque veritatis. !
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="offset-lg-4 col-lg-8">
+                        <h4 class="text-center text-white font-italic">The Team's Statement</h4>
+                        <div class="statement">
+                            <p class="text-white p-3 font-italic">
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. At consequuntur
+                                enim explicabo fuga minus molestias omnis rem reprehenderit sed vitae!
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus dolores fuga
+                                obcaecati quaerat suscipit! Amet laborum laudantium maxime neque veritatis.
+                            </p>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+        <footer class="bg-black text-center mb-0 text-white">
+        <span>Soleil Levant</span>|
+        <span>Copyright &copy;<span id="year"></span></span>
+    </footer>
+    {% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script>
+    $('#year').text(new Date().getFullYear());
+    </script>
+</body>
+</html>

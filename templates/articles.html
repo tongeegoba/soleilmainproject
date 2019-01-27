@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% extends 'home.html' %}
+{% load static %}
+{% load bootstrap4 %}
+<html lang="en">
+<head>
+    {% block head %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/articles_css.css' %}">
+    <title>Articles</title>
+    {% endblock %}
+</head>
+{% block body %}
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+    <script>
+    <body class="main-section">
+    <script type="text/javascript" src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/articles/api/list',
+                method: 'GET',
+                success: function(data){
+                    $.each(data, function (key, value) {
+                        {#console.log(key)#}
+                        {#console.log(value)#}
+
+                        var articleKey = key
+                        var title = value.title
+                        var author = value.author.username.toUpperCase()
+                        var other_authors = value.other_authors
+                        var upvotes = value.up_votes
+                        var created = value.date_display
+                        var content = value.content
+
+
+                        $('#container').append(
+                            '<div class = \'card mb-3\' >' +
+                            '<p class = \'card-footer black \' >' +'<small>' +'Author'+'</small>' + ' | '
+                            +'<strong class=\'text-primary\'>'+
+                            author + ' :: '+ '</strong>'
+                            + title + '</p>' + '<div class = \'card-body text-muted\'>' + content + '</div>' +
+                             '<div class = \'card-footer\'>'+'Written On | '+'<small class=\'text-primary\'>'+created
+                                +'</small>'
+                            +' --Other Authors: '
+                            + '<small class=\'text-primary\'>' +other_authors+ '</small>'
+                            +'</div>' +'</div>'
+
+
+                        )
+                    })
+                },
+                error: function (data) {
+                    {#console.log(data)#}
+                    
+                }
+            })
+
+         $('#article-form').submit(function (event) {
+             event.preventDefault()
+             var this_ = $(this)
+             var formData = this_.serialize()
+             console.log(this_)
+             console.log(event)
+
+             $.ajax({
+                 url: '/articles/api/create/',
+                 data: formData,
+                 method: 'POST',
+                 success: function (data) {
+                     this_.find('input[type=text], textarea').val('')
+
+                 },
+                 error: function (data) {
+                     console.log(data)
+
+                 }
+
+             })
+
+         })
+
+        })
+    </script>
+
+<div class="container mt-5">
+<hr>
+    <div class="row">
+        <div class="col-md-4">
+            <form method="post" class="mb-5" >
+                <h5 class="mb-2 "><span class="text-white">Write Your Own Article!</span></h5>
+                {% bootstrap_form form %}
+                {% csrf_token %}
+                {% if user.is_authenticated %}
+                <input type="submit" value="Post Article" class="btn btn-dark">
+                {% else %}
+                <a class="btn btn-dark" href="{% url 'accounts:login' %}">Please Login First</a>
+                {% endif %}
+            </form>
+            <hr>
+
+        </div>
+        <div class="col-md-6 ">
+            <div id="container">
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+{% endblock %}
+</html>

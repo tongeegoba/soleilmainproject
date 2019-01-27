@@ -1,0 +1,47 @@
+.mynav{
+    opacity: 0.9;
+    border-bottom: #fedf08 3px solid;
+}
+
+.navbar .nav-link{
+    font-size: 12px;
+    text-transform: uppercase;
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+}
+
+.navbar .nav-item.active{
+    border-left: #444 3px solid;
+}
+
+.main-section{
+    background: #a9b0b4;
+}
+
+.bg-black{
+    background: black;
+}
+
+.carousel-item{
+    height: 450px;
+}
+
+.carousel-image-1{
+    background: url("../images/fire.jpg");
+    background-size: cover;
+}
+
+.carousel-image-2{
+    background: url("../images/equal.jpg");
+    background-size: cover;
+}
+
+.carousel-image-3{
+    background: url("../images/phone.jpg");
+    background-size: cover;
+}
+
+.bg-cover{
+    background: black;
+    opacity: 0.8;
+}
